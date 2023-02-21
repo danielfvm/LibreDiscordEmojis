@@ -1,3 +1,5 @@
+#!/bin/python
+
 from time import sleep
 from injector import inject
 from distutils.spawn import find_executable
