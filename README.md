@@ -1,13 +1,15 @@
 # LibreDiscordEmojis
-Use emojis and stickers in Discord for free without buying Nitro. 
+Use emojis and stickers in Discord for free without buying Nitro. Use the emoji and sticker selector to send them. Keep in mind that you cannot
+use the emojis inserted in text and that you cannot send them using the `:emoji:` shortcut.
 
 # Is it save to use?
-**No**, using this script or any other program that modifies Discord is **against the TOS** and can lead to a ban of your account. **Use this
+**No**, using this script or any other programs that modifie Discord is **against the TOS** and can lead to a ban of your account. **Use this
 script at your own risk!**
 
 # Installation
 ## Linux
-Follow the instructions as listed below if you are running a linux system (should work on windows too, if required packages are installed):
+Follow the instructions as listed below if you are running a linux system (should work on windows too, if required packages are installed).
+Keep in mind that discord has to be closed before starting `main.py`.
 ```
 git clone http://github.com/danielfvm/LibreDiscordEmojis
 cd LibreDiscordEmojis
@@ -27,3 +29,7 @@ message box and then sends it.
 # Why is there a webserver running in the py script?
 I was not able to send the url of the emoji directly from the injected script. If you know a way how to insert and send a text into the
 discord chat box, please feel free to make a pull request.
+
+# Dependencies
+This project makes use of code from the [electron-inject](https://github.com/tintinweb/electron-inject) project for injecting the `script.js` 
+file into Discord (See `injector.py`).
