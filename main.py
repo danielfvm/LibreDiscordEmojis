@@ -6,18 +6,19 @@ from distutils.spawn import find_executable
 from pynput.keyboard import Controller
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import unquote
+from threading import Thread
 
 import logging
 import psutil
 import sys
 
-
-keyboard = Controller()
-
 hostName = "localhost"
 serverPort = 8080
 
-class MyServer(BaseHTTPRequestHandler):
+logger = logging.getLogger(__name__)
+keyboard = Controller()
+
+class KeyboardServer(BaseHTTPRequestHandler):
     def do_GET(self):
         data = unquote(self.path)[1:].replace("size=56", "size=48").replace("&quality=lossless", "")
 
@@ -32,6 +33,8 @@ class MyServer(BaseHTTPRequestHandler):
         self.wfile.write(bytes("<body></body>", "utf-8"))
 
 def start_discord():
+    global proc
+
     logging.basicConfig(level=logging.DEBUG)
 
     target = find_executable('discord') or find_executable('discord.exe') or sys.argv[1]
@@ -46,17 +49,24 @@ def start_discord():
         return
 
     print('Discord executable found at:', target)
-    inject(target, './script.js')
+    return inject(target, './script.js').proc
+
 
 if __name__ == "__main__":
-    webServer = HTTPServer((hostName, serverPort), MyServer)
+    webServer = HTTPServer((hostName, serverPort), KeyboardServer)
     print("Server started http://%s:%s" % (hostName, serverPort))
 
     try:
-        start_discord()
-        webServer.serve_forever()
+        p = start_discord()
+
+        server_thread = Thread(target=webServer.serve_forever, args=())
+        server_thread.start()
+
+        # Wait until discord stops
+        while p.poll() is None:
+            sleep(1)
+
     except KeyboardInterrupt:
         pass
 
-    webServer.server_close()
-    print("Server stopped.")
+    webServer.shutdown()

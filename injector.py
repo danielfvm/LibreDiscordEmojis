@@ -32,11 +32,13 @@ class LazyWebsocket(object):
         return self.recv()
 
     def close(self):
+        print("disconnected")
         self.ws.close()
 
 
 class ElectronRemoteDebugger(object):
-    def __init__(self, host, port):
+    def __init__(self, proc, host, port):
+        self.proc = proc
         self.params = {'host': host, 'port': port}
 
     def windows(self):
@@ -96,7 +98,7 @@ class ElectronRemoteDebugger(object):
             sock.close()
 
         cmd = "%s %s" % (path, "--remote-debugging-port=%d" % port)
-        print (cmd)
+        print(cmd)
         p = subprocess.Popen(cmd, shell=True)
         time.sleep(2)
         if p.poll() is not None:
@@ -108,7 +110,8 @@ class ElectronRemoteDebugger(object):
             if result > 0:
                 break
             time.sleep(1)
-        return cls("localhost", port=port)
+
+        return cls(p, "localhost", port=port)
 
 
 def inject(target, script, port=None):
@@ -137,3 +140,5 @@ def inject(target, script, port=None):
 
         logger.debug("timeout not hit.")
         time.sleep(1)
+
+    return erb
