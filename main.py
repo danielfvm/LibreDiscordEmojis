@@ -14,7 +14,7 @@ import psutil
 import sys
 
 hostName = "localhost"
-serverPort = 8080
+serverPort = 8875
 
 logger = logging.getLogger(__name__)
 keyboard = Controller()
@@ -22,6 +22,7 @@ keyboard = Controller()
 class KeyboardServer(BaseHTTPRequestHandler):
     def do_GET(self):
         data = unquote(self.path)[1:].replace("size=56", "size=48").replace("&quality=lossless", "")
+        print(data)
 
         # write url into chatbox and send it
         for key in data:
