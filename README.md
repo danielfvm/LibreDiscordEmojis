@@ -18,8 +18,8 @@ python main.py
 ```
 
 ## Windows
-Download the `.exe` file from releases. Make sure discord is not running and start the executable. It should start discord automatically with
-the script applied.
+Download the `.zip` file from releases, extract it and start the executable `LibreDiscordEmojis.exe`. It should start discord automatically with
+the script applied. Make sure discord is not running, otherwise it will only open the already started discord window, wihout the script applied.
 
 # How it works?
 This works by injecting the `script.js` file into Discord which can detect if a user clicks on an emoji that has been disabled. 
