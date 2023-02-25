@@ -3,11 +3,11 @@
 
 import requests
 import time
-import websocket
 import json
 import socket
 import subprocess
 import logging
+import websocket
 
 logger = logging.getLogger(__name__)
 
