@@ -3,7 +3,7 @@ Use emojis and stickers in Discord for free without buying Nitro. Use the emoji 
 use the emojis inserted in text and that you cannot send them using the `:emoji:` shortcut.
 
 # Is it save to use?
-**No**, using this script or any other programs that modify Discord is **against the TOS** and can lead to a ban of your account. **Use this
+**No**, using this script or any other programs that modify Discord is **against the TOS** and could lead to a ban of your account. **Use this
 script at your own risk!**
 
 # Installation
